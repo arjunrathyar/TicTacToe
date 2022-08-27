@@ -9,7 +9,12 @@ body{
 }
 
 #pt,#rb{
+  color: #2d414b;
   font-family: 'VALORANT', sans-serif;
+}
+
+#pt{
+  color: red;
 }
 
 
@@ -18,7 +23,7 @@ body{
 }
 
 .container{
-  padding: 40px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,10 +34,11 @@ body{
   width: 450px;
   display:flex;
   flex-wrap: wrap;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .box{
+  color: blue;
   height: 150px;
   width: 150px;
   display: flex;
