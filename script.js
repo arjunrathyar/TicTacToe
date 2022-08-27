@@ -1,28 +1,61 @@
-let player = document.getElementById('pt')
 let reset = document.getElementById('rb')
 let boxes = Array.from(document.getElementsByClassName('box'))
 let winbl = getComputedStyle(document.body).getPropertyValue('--victory-blocks')
+let out = document.getElementById('gameboard')
 
 const playerO = "O"
 const playerX = "X"
 
+var count = 0;
+
 let currentplayer = playerX
 let newarray = Array(9).fill(null)
 
-const Start = () => {boxes.forEach(box => box.addEventListener('click',selected))}
+const Start = () => {
+  boxes.forEach(box => box.addEventListener('click',selected))
+}
 
 function selected(s){
-  const id = s.target.id
+  const id = s.target.id;
+
   if(!newarray[id] && win()==false){
     newarray[id] = currentplayer
     s.target.innerText = currentplayer
+
+    count = count+1;
+
     if (win() !==false){
       let victoryblocks = win()
       victoryblocks.map( box => boxes[box].style.backgroundColor=winbl)
+
+      var ndiv = document.createElement("div");
+      ndiv.setAttribute('id','newdiv')
+      ndiv.style.background = "green";
+      ndiv.style.color = "white";
+      ndiv.style.marginTop = "30px";
+      ndiv.style.textAlign = "center";
+      ndiv.style.alignSelf = "stretch"
+      ndiv.innerHTML = currentplayer+ ' WON!!';
+      document.getElementById("main").appendChild(ndiv);
+
       return
     }
     currentplayer = currentplayer == playerX ? playerO : playerX
-  }
+    }
+
+    if (count>8){
+      var ndiv = document.createElement("div");
+      ndiv.setAttribute('id','newdiv')
+      ndiv.style.background = "red";
+      ndiv.style.color = "white";
+      ndiv.style.marginTop = "30px";
+      ndiv.style.textAlign = "center";
+      ndiv.style.alignSelf = "stretch"
+      ndiv.innerHTML = 'Match Tied';
+      document.getElementById("main").appendChild(ndiv);
+
+      return
+    }
 }
 
 const winmatch = [
@@ -54,6 +87,9 @@ function ng(){
   box.innerText = ''
   box.style.backgroundColor=''})
   currentplayer = playerX
+  document.getElementById("newdiv").remove();
+  count = 0
+
 }
 
 Start()
